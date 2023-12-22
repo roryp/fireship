@@ -1,6 +1,7 @@
 namespace Quantum.Fireship {
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Measurement;
+    open Microsoft.Quantum.Canon;
 
     @EntryPoint()
     operation DecideToWatchFireship() : String {
@@ -10,6 +11,11 @@ namespace Quantum.Fireship {
 
         // Measure the qubit
         let result = M(qubit);
+
+        // Reset the qubit to its |0⟩ state
+        if (result == One) {
+            X(qubit);
+        }
 
         // Return a message based on the quantum measurement
         return (result == Zero)
